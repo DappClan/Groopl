@@ -1,0 +1,36 @@
+{
+  "name": "backend",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.7.0",
+  "description": "provision iq server",
+  "author": "kimita",
+  "license": "ISC",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "eslint . --fix",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "apollo-server-express": "catalog:backend",
+    "class-validator": "catalog:backend",
+    "express": "catalog:backend",
+    "graphql": "catalog:backend",
+    "pg": "catalog:backend",
+    "reflect-metadata": "catalog:backend",
+    "type-graphql": "catalog:backend",
+    "typeorm": "catalog:backend"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:dev",
+    "@types/express": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "eslint": "catalog:dev",
+    "nodemon": "catalog:dev",
+    "ts-node": "catalog:dev",
+    "typescript": "catalog:dev"
+  }
+}
