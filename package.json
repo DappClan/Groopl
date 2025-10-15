@@ -24,9 +24,11 @@
     "simple-git-hooks": "catalog:dev"
   },
   "resolutions": {
+    "@nuxt/devtools": "catalog:build",
+    "@nuxt/kit": "catalog:build",
+    "nuxt": "catalog:build",
     "unplugin": "catalog:build",
-    "vite": "catalog:build",
-    "vite-plugin-inspect": "catalog:build"
+    "vite": "catalog:build"
   },
   "config": {
     "commitizen": {
