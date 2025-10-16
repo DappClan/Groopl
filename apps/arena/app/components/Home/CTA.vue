@@ -3,7 +3,8 @@ import { Button } from '@/components/ui/button'
 </script>
 
 <template>
-  <div class="before:bg-linear-[to_bottom,--alpha(var(--colors-zinc-800)/25%),--alpha(var(--colors-zinc-700)/50%)_400px,--alpha(var(--colors-zinc-700)/50%)_calc(100%-400px),--alpha(var(--colors-zinc-800)/25%)] after:bg-linear-[to_bottom,--alpha(var(--colors-zinc-800)/25%),--alpha(var(--colors-zinc-700)/50%)_400px,--alpha(var(--colors-zinc-700)/50%)_calc(100%-400px),--alpha(var(--colors-zinc-800)/25%)] mx-auto flex flex-col max-w-170 min-h-screen relative after:w-px before:w-px after:inset-y-0 before:inset-y-0 after:absolute before:absolute after:-right-42 before:-left-42">
+  <main flex-1 />
+  <div>
     <div class="py-12 flex flex-col gap-6 max-w-3xl w-full">
       <!-- Badge -->
       <div class="flex items-center justify-center">
