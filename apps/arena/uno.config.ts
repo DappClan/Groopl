@@ -1,4 +1,3 @@
-import { fileURLToPath } from 'node:url'
 import { createLocalFontProcessor } from '@unocss/preset-web-fonts/local'
 import {
   presetAttributify,
@@ -69,15 +68,14 @@ export default {
     }),
     presetTypography(),
     presetWebFonts({
+      provider: 'google',
       fonts: {
         sans: 'DM Sans:200,400,700',
         serif: 'Instrumental Serif',
         mono: 'DM Mono',
+        pacifico: 'Pacifico',
       },
-      processors: createLocalFontProcessor({
-        fontAssetsDir: fileURLToPath(new URL('./app/public/fonts', import.meta.url)),
-        fontServeBaseUrl: './fonts',
-      }),
+      processors: createLocalFontProcessor(),
     }),
   ],
   transformers: [
