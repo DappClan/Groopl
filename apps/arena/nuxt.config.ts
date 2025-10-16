@@ -1,5 +1,5 @@
+import { appDescription } from './app/config'
 import { pwa } from './app/config/pwa'
-import { appDescription } from './app/constants/index'
 
 export default defineNuxtConfig({
   modules: [
@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
     '@nuxt/eslint',
+    'reka-ui/nuxt',
   ],
 
   devtools: {

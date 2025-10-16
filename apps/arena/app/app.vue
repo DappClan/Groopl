@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { appName } from '~/constants'
+import { appName } from '@/config'
 
 useHead({
   title: appName,
@@ -23,6 +23,10 @@ body,
 }
 
 html.dark {
-  color-scheme: dark;
+  filter: invert(1) hue-rotate(180deg);
+}
+
+body {
+  background: white;
 }
 </style>

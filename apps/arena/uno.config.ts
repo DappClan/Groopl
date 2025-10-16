@@ -9,6 +9,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
+import presetShadcn from './preset.shadcn'
 
 export default defineConfig({
   shortcuts: [
@@ -18,6 +19,7 @@ export default defineConfig({
   presets: [
     presetWind4(),
     presetAttributify(),
+    presetShadcn(),
     presetIcons({
       scale: 1.2,
     }),
