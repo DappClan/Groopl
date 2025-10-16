@@ -5,7 +5,7 @@ import { h } from '@unocss/preset-mini/utils'
 export interface PresetShadcnOptions extends PresetMiniOptions { }
 
 function handleMatchNumber(v: string, defaultVal = '0') {
-  return h.cssvar.percent(v || defaultVal)
+  return h.cssvar.global.auto.fraction.number(v || defaultVal)?.toString().replace('%', '')
 }
 const handleMatchRem = (v: string, defaultVal = 'full') => h.bracket.cssvar.global.auto.fraction.rem(v || defaultVal)
 
@@ -23,34 +23,40 @@ export function presetShadcn(_options: PresetShadcnOptions = {}): Preset<Theme> 
           @keyframes shadcn-exit { to{ opacity: var(--un-exit-opacity, 1); transform: translate3d(var(--un-exit-translate-x, 0), var(--un-exit-translate-y, 0), 0) scale3d(var(--un-exit-scale, 1), var(--un-exit-scale, 1), var(--un-exit-scale, 1)) rotate(var(--un-exit-rotate, 0)) } }
         
           :root {
-            --background: 0 0% 100%;
-            --foreground: 222.2 84% 4.9%;
-          
-            --card: 0 0% 100%;
-            --card-foreground: 222.2 84% 4.9%;
-          
-            --popover: 0 0% 100%;
-            --popover-foreground: 222.2 84% 4.9%;
-          
-            --primary: 221.2 83.2% 53.3%;
-            --primary-foreground: 210 40% 98%;
-          
-            --secondary: 210 40% 96.1%;
-            --secondary-foreground: 222.2 47.4% 11.2%;
-          
-            --muted: 210 40% 96.1%;
-            --muted-foreground: 215.4 16.3% 46.9%;
-          
-            --accent: 210 40% 96.1%;
-            --accent-foreground: 222.2 47.4% 11.2%;
-          
-            --destructive: 0 84.2% 60.2%;
-            --destructive-foreground: 210 40% 98%;
-          
-            --border: 214.3 31.8% 91.4%;
-            --input: 214.3 31.8% 91.4%;
-            --ring: 221.2 83.2% 53.3%;
-            --radius: 0.5rem;
+            --card: 1 0 0;
+            --card-foreground: .141 .005 285.823;
+            --popover: 1 0 0;
+            --popover-foreground: .141 .005 285.823;
+            --primary: .585 .233 277.117;
+            --primary-to: .511 .262 276.966;
+            --primary-foreground: .962 .018 272.314;
+            --secondary: .967 .001 286.375;
+            --secondary-foreground: .183 .006 285.79;
+            --muted: .967 .001 286.375;
+            --muted-foreground: .552 .016 285.938;
+            --accent: .967 .001 286.375;
+            --accent-foreground: .183 .006 285.79;
+            --destructive: .637 .237 25.331;
+            --destructive-foreground: .637 .237 25.331;
+            --border: .92 .004 286.32;
+            --input: .871 .006 286.286;
+            --ring: .871 .006 286.286;
+            --chart-1: .585 .233 277.117;
+            --chart-2: .6 .118 184.704;
+            --chart-3: .398 .07 227.392;
+            --chart-4: .828 .189 84.429;
+            --chart-5: .769 .188 70.08;
+            --radius: .625rem;
+            --sidebar-background: .956 .002 286.35;
+            --sidebar-foreground: .37 .013 285.805;
+            --sidebar-primary: .673 .182 276.935;
+            --sidebar-primary-foreground: .985 0 0;
+            --sidebar-accent: .967 .001 286.375;
+            --sidebar-accent-foreground: .21 .006 285.885;
+            --sidebar-border: .92 .004 286.32;
+            --sidebar-ring: .871 .006 286.286;
+            --background: 1 0 0;
+            --foreground: .141 .005 285.823;
             --vis-tooltip-background-color: none !important;
             --vis-tooltip-border-color: none !important;
             --vis-tooltip-text-color: none !important;
@@ -60,40 +66,45 @@ export function presetShadcn(_options: PresetShadcnOptions = {}): Preset<Theme> 
             --vis-line-gapfill-stroke-dasharray: none;
             --vis-line-gapfill-stroke-opacity: 1;
             --vis-line-gapfill-stroke-dashoffset: 0;
-
             --vis-primary-color: var(--primary);
             --vis-secondary-color: 160 81% 40%;
             --vis-text-color: var(--muted-foreground);
           }
            
           .dark {
-            --background: 222.2 84% 4.9%;
-            --foreground: 210 40% 98%;
-          
-            --card: 222.2 84% 4.9%;
-            --card-foreground: 210 40% 98%;
-          
-            --popover: 222.2 84% 4.9%;
-            --popover-foreground: 210 40% 98%;
-          
-            --primary :217.2 91.2% 59.8%;
-            --primary-foreground: 222.2 47.4% 11.2%;
-          
-            --secondary: 217.2 32.6% 17.5%;
-            --secondary-foreground: 210 40% 98%;
-          
-            --muted: 217.2 32.6% 17.5%;
-            --muted-foreground: 215 20.2% 65.1%;
-          
-            --accent: 217.2 32.6% 17.5%;
-            --accent-foreground: 210 40% 98%;
-          
-            --destructive: 0 62.8% 30.6%;
-            --destructive-foreground: 210 40% 98%;
-          
-            --border: 217.2 32.6% 17.5%;
-            --input: 217.2 32.6% 17.5%;
-            --ring: 224.3 76.3% 48%;
+            --background: .183 .006 285.79;
+            --foreground: .985 0 0;
+            --card: .37 .013 285.805;
+            --card-foreground: .985 0 0;
+            --popover: .274 .006 286.033;
+            --popover-foreground: .985 0 0;
+            --primary: .585 .233 277.117;
+            --primary-to: .511 .262 276.966;
+            --primary-foreground: .962 .018 272.314;
+            --secondary: .274 .006 286.033;
+            --secondary-foreground: .985 0 0;
+            --muted: .21 .006 285.885;
+            --muted-foreground: .705 .015 286.067;
+            --accent: .21 .006 285.885;
+            --accent-foreground: .985 0 0;
+            --destructive: .637 .237 25.331;
+            --destructive-foreground: .637 .237 25.331;
+            --border: .246 .009 285.69;
+            --input: .246 .009 285.69;
+            --ring: .442 .017 285.786;
+            --chart-1: .585 .233 277.117;
+            --chart-2: .6 .118 184.704;
+            --chart-3: .398 .07 227.392;
+            --chart-4: .828 .189 84.429;
+            --chart-5: .769 .188 70.08;
+            --sidebar-background: .21 .006 285.885;
+            --sidebar-foreground: .967 .001 286.375;
+            --sidebar-primary: .673 .182 276.935;
+            --sidebar-primary-foreground: 1 0 0;
+            --sidebar-accent: .274 .006 286.033;
+            --sidebar-accent-foreground: .967 .001 286.375;
+            --sidebar-border: .274 .006 286.033;
+            --sidebar-ring: .442 .017 285.786;
           }
         `,
       },
@@ -166,43 +177,65 @@ export function presetShadcn(_options: PresetShadcnOptions = {}): Preset<Theme> 
     ],
     theme: {
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        border: 'oklch(var(--border))',
+        input: 'oklch(var(--input))',
+        ring: 'oklch(var(--ring))',
+        background: 'oklch(var(--background))',
+        foreground: 'oklch(var(--foreground))',
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+          DEFAULT: 'oklch(var(--primary))',
+          foreground: 'oklch(var(--primary-foreground))',
+          to: 'oklch(var(--primary-to))',
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary))',
+          DEFAULT: 'oklch(var(--secondary))',
+          foreground: 'oklch(var(--secondary-foreground))',
         },
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
+          DEFAULT: 'oklch(var(--destructive))',
+          foreground: 'oklch(var(--destructive-foreground))',
         },
         muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
+          DEFAULT: 'oklch(var(--muted))',
+          foreground: 'oklch(var(--muted-foreground))',
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
+          DEFAULT: 'oklch(var(--accent))',
+          foreground: 'oklch(var(--accent-foreground))',
         },
         popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
+          DEFAULT: 'oklch(var(--popover))',
+          foreground: 'oklch(var(--popover-foreground))',
         },
         card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
+          DEFAULT: 'oklch(var(--card))',
+          foreground: 'oklch(var(--card-foreground))',
+        },
+        chart1: 'oklch(var(--chart1))',
+        chart2: 'oklch(var(--chart2))',
+        chart3: 'oklch(var(--chart3))',
+        chart4: 'oklch(var(--chart4))',
+        chart5: 'oklch(var(--chart5))',
+        sidebar: {
+          DEFAULT: 'oklch(var(--sidebar-background))',
+          background: 'oklch(var(--sidebar-background))',
+          foreground: 'oklch(var(--sidebar-foreground))',
+          primary: {
+            DEFAULT: 'oklch(var(--sidebar-primary))',
+            foreground: 'oklch(var(--sidebar-primary-foreground))',
+          },
+          accent: {
+            DEFAULT: 'oklch(var(--sidebar-accent))',
+            foreground: 'oklch(var(--sidebar-accent-foreground))',
+          },
+          border: 'oklch(var(--sidebar-border))',
+          ring: 'oklch(var(--sidebar-ring))',
         },
       },
       borderRadius: {
-        lg: `var(--radius)`,
-        md: `calc(var(--radius) - 2px)`,
+        xl: 'calc(var(--radius) + 4px)',
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
     },

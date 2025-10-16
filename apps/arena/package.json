@@ -49,6 +49,8 @@
     "tailwind-merge": "catalog:arena",
     "typescript": "catalog:dev",
     "unocss": "catalog:build",
+    "unocss-preset-animations": "catalog:arena",
+    "unocss-preset-shadcn": "catalog:arena",
     "vue": "catalog:arena",
     "vue-tsc": "catalog:dev"
   }

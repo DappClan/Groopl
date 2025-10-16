@@ -11,12 +11,7 @@ const props = defineProps<{
 
 <template>
   <button
-    :class="cn(`isolate relative inline-flex justify-center items-center transition-all duration-100 font-500
-        border border-primary h-2rem w-full hover:bg-foreground:80 after:absolute after:z-1 after:inset-0 after:transition-all
-        after:bg-gradient-to-b after:from-black:15 after:to-transparent after:opacity-100 after:rounded-inherit
-        after:content-empty  outline-0 select-none cursor-pointer shadow-sm m-0 text-background font-bold
-        py-[.375rem] px-[.75rem] bg-foreground rounded-[.375rem] disabled:bg-foreground:50 disabled:border-border:20 disabled:cursor-auto
-        text-[.8125rem]`, props.class)"
+    :class="cn(`inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] bg-linear-to-b from-primary to-[oklch(var(--primary-to))] text-primary-foreground shadow-sm bg-[length:100%_100%] bg-[bottom] hover:bg-[length:100%_150%] inset-shadow-[0_1px_rgb(255_255_255/0.15)] transition-all h-10 rounded-md px-8 w-full hover:cursor-pointer`, props.class)"
   >
     <span flex flex-row items-center box-border justify-start>
       {{ props.text }}

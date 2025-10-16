@@ -3,6 +3,8 @@ import DialogTrigger from '@/components/ui/dialog/DialogTrigger.vue'
 
 const { accountId, walletInterface } = useWalletInterface()
 
+const open = ref(false)
+
 async function handleConnect() {
   if (accountId.value) {
     walletInterface.value?.disconnect()
@@ -22,15 +24,13 @@ watch(accountId, (a) => {
 <template>
   <main class="grid select-none bottom-0 left-0 right-0 top-0 justify-center place-items-center fixed">
     <Dots />
-    <div class="content text-foreground flex flex-col bottom-0 left-0 right-0 top-0 place-items-center fixed z-20 bg-none">
+    <div class="flex flex-col bottom-0 left-0 right-0 top-0 place-items-center fixed z-20">
       <!-- Nav -->
-      <div class="px-4 py-6 border-b border-border bg-background flex w-full">
-        <div class="text-2xl text-cyan-600 font-bold">
-          Groopl
-        </div>
+      <div class="px-4 py-6 flex w-full">
+        <Logo />
         <div class="flex-1" />
         <!-- connect button -->
-        <WalletSelectionDialog>
+        <WalletSelectionDialog v-model:open="open">
           <DialogTrigger as-child>
             <UxButton
               class="w-fit"
@@ -50,9 +50,3 @@ watch(accountId, (a) => {
     </div>
   </main>
 </template>
-
-<style scoped>
-.content {
-  filter: invert(1) hue-rotate(180deg);
-}
-</style>

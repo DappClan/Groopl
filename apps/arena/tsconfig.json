@@ -5,14 +5,13 @@
       "@/*": [
         "./app/*"
       ]
-    },
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "skipLibCheck": true
+    }
+    // "resolveJsonModule": true,
+    // "allowJs": true,
+    // "strict": true,
+    // "noEmit": true,
+    // "esModuleInterop": true,
+    // "isolatedModules": true,
+    // "skipLibCheck": true
   }
-
 }

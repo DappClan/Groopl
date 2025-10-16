@@ -9,7 +9,15 @@ import {
 import { connectToMetamask } from '@/composables/useMetamask'
 import { openWalletConnectModal } from '@/composables/useWalletConnect'
 
-const open = ref(false)
+const props = defineProps<{
+  open: boolean
+}>()
+
+const emits = defineEmits(['update:open'])
+
+const open = useVModel(props, 'open', emits, {
+  passive: true,
+})
 
 function handleClose() {
   open.value = false
@@ -35,8 +43,8 @@ async function handleMetamask() {
       </DialogHeader>
       <div class="py-4 flex flex-col gap-3">
         <Button
-          variant="outline"
-          class="gap-3 w-full justify-start"
+          variant="secondary"
+          class="p-2 gap-3 w-full justify-start"
           @click="handleWalletConnect"
         >
           <!-- <img
@@ -47,8 +55,8 @@ async function handleMetamask() {
           <span>WalletConnect</span>
         </Button>
         <Button
-          variant="outline"
-          class="gap-3 w-full justify-start"
+          variant="secondary"
+          class="p-2 gap-3 w-full justify-start"
           @click="handleMetamask"
         >
           <!-- <img

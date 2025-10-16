@@ -51,7 +51,7 @@ onMounted(async () => {
 
   function setup() {
     createCanvas(window.innerWidth, window.innerHeight)
-    background('#ffffff')
+    // background('#00ffffff')
     stroke('#ccc')
     noFill()
 
@@ -61,7 +61,7 @@ onMounted(async () => {
   }
 
   function draw({ circle }: P5I) {
-    background('#ffffff')
+    background('#ffffff0')
     const t = +new Date() / 10000
 
     for (const p of points) {
@@ -109,5 +109,5 @@ onUnmounted(async () => {
 </script>
 
 <template>
-  <div ref="el" pointer-events-none bottom-0 left-0 right-0 top-0 fixed z--1 />
+  <div ref="el" pointer-events-none bottom-0 left-0 right-0 top-0 fixed z--1 style="filter: invert(1) hue-rotate(180deg);" />
 </template>
