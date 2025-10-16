@@ -4,5 +4,13 @@ body,
   height: 100vh;
   margin: 0;
   padding: 0;
-  @apply bg-sidebar text-foreground border-border;
+}
+
+body {
+  background-color: var(--colors-background);
+  color: var(--colors-foreground);
+  background-image: url(./media/noise.png);
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-attachment: fixed;
 }

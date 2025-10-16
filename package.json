@@ -42,6 +42,6 @@
     "pre-commit": "pnpm lint-staged"
   },
   "lint-staged": {
-    "*": "pnpm turbo run format --"
+    "*": "pnpm turbo run lint --"
   }
 }

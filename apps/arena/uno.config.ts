@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url'
 import { createLocalFontProcessor } from '@unocss/preset-web-fonts/local'
 import {
   presetAttributify,
@@ -8,6 +9,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
+import presetAnimations from 'unocss-preset-animations'
 import presetShadcn from './preset.shadcn'
 
 type ThemeColorString = `${number} ${number}% ${number}%`
@@ -57,108 +59,25 @@ export default {
   ],
   presets: [
     presetWind4({
-      preflights: {
-        reset: true,
-        theme: true,
-      },
+      theme: true,
     }),
     presetAttributify(),
-    // presetAnimations(),
+    presetAnimations(),
     presetShadcn(),
-    // presetShadcn(
-    //   {
-    //     color: {
-    //       name: 'exp04',
-    //       base: 'zinc',
-    //       // light: {
-    //       //   'background': '.183 .006 285.79',
-    //       //   'foreground': '.985 0 0',
-    //       //   'card': '.37 .013 285.805',
-    //       //   'card-foreground': '.985 0 0',
-    //       //   'popover': '.274 .006 286.033',
-    //       //   'popover-foreground': '.985 0 0',
-    //       //   'primary': '.585 .233 277.117',
-    //       //   'primary-to': '.511 .262 276.966',
-    //       //   'primary-foreground': '.962 .018 272.314',
-    //       //   'secondary': '.274 .006 286.033',
-    //       //   'secondary-foreground': '.985 0 0',
-    //       //   'muted': '.21 .006 285.885',
-    //       //   'muted-foreground': '.705 .015 286.067',
-    //       //   'accent': '.21 .006 285.885',
-    //       //   'accent-foreground': '.985 0 0',
-    //       //   'destructive': '.637 .237 25.331',
-    //       //   'destructive-foreground': '.637 .237 25.331',
-    //       //   'border': '.246 .009 285.69',
-    //       //   'input': '.246 .009 285.69',
-    //       //   'ring': '.442 .017 285.786',
-    //       //   'chart-1': '.585 .233 277.117',
-    //       //   'chart-2': '.6 .118 184.704',
-    //       //   'chart-3': '.398 .07 227.392',
-    //       //   'chart-4': '.828 .189 84.429',
-    //       //   'chart-5': '.769 .188 70.08',
-    //       //   'sidebar': '.21 .006 285.885',
-    //       //   'sidebar-foreground': '.967 .001 286.375',
-    //       //   'sidebar-primary': '.673 .182 276.935',
-    //       //   'sidebar-primary-foreground': '1 0 0',
-    //       //   'sidebar-accent': '.274 .006 286.033',
-    //       //   'sidebar-accent-foreground': '.967 .001 286.375',
-    //       //   'sidebar-border': '.274 .006 286.033',
-    //       //   'sidebar-ring': '.442 .017 285.786',
-    //       // },
-    //       dark: {
-    //         'background': '.183 .006 285.79',
-    //         'foreground': '.985 0 0',
-    //         'card': '.37 .013 285.805',
-    //         'card-foreground': '.985 0 0',
-    //         'popover': '.274 .006 286.033',
-    //         'popover-foreground': '.985 0 0',
-    //         'primary': '.585 .233 277.117',
-    //         'primary-foreground': '.962 .018 272.314',
-    //         'secondary': '.274 .006 286.033',
-    //         'secondary-foreground': '.985 0 0',
-    //         'muted': '.21 .006 285.885',
-    //         'muted-foreground': '.705 .015 286.067',
-    //         'accent': '.21 .006 285.885',
-    //         'accent-foreground': '.985 0 0',
-    //         'destructive': '.637 .237 25.331',
-    //         'destructive-foreground': '.637 .237 25.331',
-    //         'border': '.246 .009 285.69',
-    //         'input': '.246 .009 285.69',
-    //         'ring': '.442 .017 285.786',
-    //         'chart-1': '.585 .233 277.117',
-    //         'chart-2': '.6 .118 184.704',
-    //         'chart-3': '.398 .07 227.392',
-    //         'chart-4': '.828 .189 84.429',
-    //         'chart-5': '.769 .188 70.08',
-    //         'sidebar': '.21 .006 285.885',
-    //         'sidebar-foreground': '.967 .001 286.375',
-    //         'sidebar-primary': '.673 .182 276.935',
-    //         'sidebar-primary-foreground': '1 0 0',
-    //         'sidebar-accent': '.274 .006 286.033',
-    //         'sidebar-accent-foreground': '.967 .001 286.375',
-    //         'sidebar-border': '.274 .006 286.033',
-    //         'sidebar-ring': '.442 .017 285.786'
-    //       } as unknown as ThemeCSSVars,
-    //     } as const,
-    //   },
-
-    //   // With default setting for SolidUI, you need to set the darkSelector option.
-    //   {
-    //     // If you are using reka ui.
-    //     componentLibrary: 'reka',
-    //   },
-    // ),
     presetIcons({
       scale: 1.2,
     }),
     presetTypography(),
     presetWebFonts({
       fonts: {
-        sans: 'Inter',
-        serif: 'DM Serif Display',
+        sans: 'DM Sans:200,400,700',
+        serif: 'Instrumental Serif',
         mono: 'DM Mono',
       },
-      processors: createLocalFontProcessor(),
+      processors: createLocalFontProcessor({
+        fontAssetsDir: fileURLToPath(new URL('./app/public/fonts', import.meta.url)),
+        fontServeBaseUrl: './fonts',
+      }),
     }),
   ],
   transformers: [
