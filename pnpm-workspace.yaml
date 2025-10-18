@@ -2,6 +2,9 @@ packages:
   - "apps/*"
   - "packages/*"
 
+shamefullyHoist: true
+autoInstallPeers: true
+
 catalogs:
 
   build:
