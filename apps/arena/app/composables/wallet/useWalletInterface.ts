@@ -1,6 +1,6 @@
 import { computed } from 'vue'
-import { metamaskWallet, useMetaMask } from './useMetamask'
-import { useWalletConnect, walletConnectWallet } from './useWalletConnect'
+import { metamaskWallet, useMetaMask } from './metamaskClient'
+import { useWalletConnect, walletConnectWallet } from './walletConnectClient'
 
 // Purpose: This composable is used to determine which wallet interface to use
 // Example: const { accountId, walletInterface } = useWalletInterface();

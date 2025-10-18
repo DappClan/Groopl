@@ -1,5 +1,5 @@
-export type NetworkName = 'testnet'
-export type ChainId = '0x128'
+export type NetworkName = 'mainnet' | 'testnet' | 'previewnet'
+export type ChainId = '0x127' | '0x128' | '0x129'
 export interface NetworkConfig {
   network: NetworkName
   jsonRpcUrl: string

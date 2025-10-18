@@ -1,17 +1,24 @@
 {
-  "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "paths": {
       "@/*": [
         "./app/*"
       ]
     }
-    // "resolveJsonModule": true,
-    // "allowJs": true,
-    // "strict": true,
-    // "noEmit": true,
-    // "esModuleInterop": true,
-    // "isolatedModules": true,
-    // "skipLibCheck": true
-  }
+  },
+  "references": [
+    {
+      "path": "./.nuxt/tsconfig.app.json"
+    },
+    {
+      "path": "./.nuxt/tsconfig.server.json"
+    },
+    {
+      "path": "./.nuxt/tsconfig.shared.json"
+    },
+    {
+      "path": "./.nuxt/tsconfig.node.json"
+    }
+  ],
+  "files": []
 }

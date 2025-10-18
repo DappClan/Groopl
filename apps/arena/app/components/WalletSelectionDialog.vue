@@ -6,8 +6,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { connectToMetamask } from '@/composables/useMetamask'
-import { openWalletConnectModal } from '@/composables/useWalletConnect'
+import { connectToMetamask } from '@/composables/wallet/metamaskClient'
+import { openWalletConnectModal } from '@/composables/wallet/walletConnectClient'
 
 const props = defineProps<{
   open: boolean

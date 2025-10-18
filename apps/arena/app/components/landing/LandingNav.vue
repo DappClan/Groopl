@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DialogTrigger from '@/components/ui/dialog/DialogTrigger.vue'
+import { useWalletInterface } from '@/composables/wallet/useWalletInterface'
 
 const { accountId, walletInterface } = useWalletInterface()
 

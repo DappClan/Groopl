@@ -1,6 +1,7 @@
 {
   "name": "arena",
   "type": "module",
+  "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@10.7.0",
   "scripts": {
@@ -19,9 +20,15 @@
   "dependencies": {
     "@hashgraph/hedera-wallet-connect": "catalog:dev",
     "@hashgraph/sdk": "catalog:dev",
+    "@iconify-emoji/twemoji": "catalog:arena",
+    "@unhead/schema": "catalog:arena",
     "@walletconnect/modal": "catalog:dev",
     "ethers": "catalog:build",
-    "reka-ui": "catalog:arena"
+    "floating-vue": "catalog:arena",
+    "reka-ui": "catalog:arena",
+    "simple-git": "catalog:arena",
+    "std-env": "catalog:arena",
+    "tiny-decode": "catalog:arena"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",
