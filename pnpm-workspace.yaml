@@ -55,7 +55,18 @@ catalogs:
     tiny-decode: ^0.1.3
     simple-git: ^3.28.0
     std-env: ^3.10.0
+    nuxt-security: ^2.4.0
 
+  dungeon:
+    '@types/amqplib': ^0.10.7
+    '@types/cors': ^2.8.19
+    '@types/express': ^5.0.3
+    '@types/node': ^24.8.1
+    dotenv: ^17.2.3
+    nodemon: ^3.1.10
+    ts-node: ^10.9.2
+    tsx: ^4.20.6
+    zod: ^4.1.12
   icons:
     '@iconify-json/carbon': ^1.2.13
     '@iconify-json/twemoji': ^1.2.4
@@ -65,4 +76,7 @@ onlyBuiltDependencies:
   - esbuild
   - unrs-resolver
   - simple-git-hooks
-
+catalog:
+  '@unlazy/nuxt': ^1.0.0
+  '@vue-macros/nuxt': ^3.1.1
+  postcss-nested: ^7.0.2
