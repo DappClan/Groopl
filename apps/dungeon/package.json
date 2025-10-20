@@ -1,0 +1,34 @@
+{
+  "name": "dungeon",
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.7.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "db:generate": "typeorm-ts-node-esm migration:generate src/migrations/Migration -d src/lib/datasource-cli.ts",
+    "db:push": "typeorm-ts-node-esm migration:run -d src/lib/datasource-cli.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "eslint . --fix",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:dev",
+    "@types/amqplib": "catalog:dungeon",
+    "@types/cors": "catalog:dungeon",
+    "@types/express": "catalog:dungeon",
+    "@types/node": "catalog:dungeon",
+    "dotenv": "catalog:dungeon",
+    "eslint": "catalog:dev",
+    "nodemon": "catalog:dungeon",
+    "ts-node": "catalog:dungeon",
+    "tsx": "catalog:dungeon",
+    "typescript": "catalog:dev",
+    "zod": "catalog:dungeon"
+  }
+}
