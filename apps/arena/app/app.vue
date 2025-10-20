@@ -12,8 +12,3 @@ useHead({
     <NuxtPage />
   </NuxtLayout>
 </template>
-
-<style>
-/* @import '@unocss/reset/tailwind.css'; */
-@import './globals.css';
-</style>

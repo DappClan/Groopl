@@ -1,25 +1,17 @@
 <script setup lang="ts">
-import DialogTrigger from '@/components/ui/dialog/DialogTrigger.vue'
 import { useWalletInterface } from '@/composables/wallet/useWalletInterface'
+import { openWalletDialog } from '~/composables/dialog'
 
 const { accountId, walletInterface } = useWalletInterface()
 
-const open = ref(false)
-
-async function handleConnect() {
+function handleConnect() {
   if (accountId.value) {
     walletInterface.value?.disconnect()
   }
   else {
-    open.value = true
+    openWalletDialog()
   }
 }
-
-watch([accountId, open], (a, o) => {
-  if (a && o) {
-    open.value = false
-  }
-})
 </script>
 
 <template>
@@ -48,16 +40,18 @@ watch([accountId, open], (a, o) => {
           </p>
         </div>
 
-        <WalletSelectionDialog v-model:open="open">
-          <DialogTrigger as-child>
-            <UxButton
-              class="w-fit"
-              text="Start Playing Now"
-              type="button"
-              @click="handleConnect"
-            />
-          </DialogTrigger>
-        </WalletSelectionDialog>
+        <button
+          flex="~ row"
+          gap-x-2
+          items-center
+          btn-solid
+          rounded-3
+          type="button"
+          @click="handleConnect"
+        >
+          <span aria-hidden="true" block i-ri:gamepad-line />
+          Start Playing Now
+        </button>
       </div>
     </div>
   </main>

@@ -1,0 +1,234 @@
+{
+  "a11y": {
+    "loading_page": "Loading page, please wait",
+    "loading_titled_page": "Loading {0} page, please wait",
+    "locale_changed": "Language changed to {0}",
+    "locale_changing": "Changing language, please wait",
+    "route_loaded": "Page {0} loaded"
+  },
+  "action": {
+    "apply": "Apply",
+    "cancel": "Cancel",
+    "clear": "Clear",
+    "close": "Close",
+    "confirm": "Confirm",
+    "connect_wallet": "Connect Wallet",
+    "disconnect_wallet": "Disconnect Wallet",
+    "done": "Done",
+    "edit": "Edit",
+    "enter_arena": "Enter Arena",
+    "join_game": "Join Game",
+    "leave_game": "Leave Game",
+    "more": "More",
+    "next": "Next",
+    "play_again": "Play Again",
+    "prev": "Prev",
+    "reset": "Reset",
+    "save": "Save",
+    "save_changes": "Save changes",
+    "start_game": "Start Game"
+  },
+  "app_desc_short": "A social gaming platform on Hedera",
+  "app_logo": "Groopl Logo",
+  "app_name": "Groopl",
+  "command": {
+    "activate": "Activate",
+    "complete": "Complete",
+    "connect_wallet": "Connect your wallet",
+    "select_lang": "Select language",
+    "switch_wallet": "Switch wallet account",
+    "toggle_dark_mode": "Toggle dark mode",
+    "toggle_zen_mode": "Toggle zen mode"
+  },
+  "common": {
+    "end_of_list": "End of the list",
+    "error": "ERROR",
+    "fetching": "Fetching...",
+    "in": "in",
+    "no_games": "No games available",
+    "no_matches": "No match history yet",
+    "not_found": "404 Not Found",
+    "offline_desc": "Seems like you are offline. Please check your network connection."
+  },
+  "confirm": {
+    "common": {
+      "cancel": "No",
+      "confirm": "Yes"
+    },
+    "disconnect_wallet": {
+      "cancel": "Cancel",
+      "confirm": "Disconnect",
+      "description": "Are you sure you want to disconnect your wallet?",
+      "title": "Disconnect Wallet"
+    },
+    "leave_game": {
+      "cancel": "Stay",
+      "confirm": "Leave",
+      "description": "Are you sure you want to leave this game? You may lose your progress.",
+      "title": "Leave Game"
+    }
+  },
+  "error": {
+    "file_size_cannot_exceed_n_mb": "File size cannot exceed {0}MB",
+    "game_not_found": "Game not found",
+    "room_not_found": "Room not found",
+    "unsupported_file_format": "Unsupported file format",
+    "wallet_connection_error": "Cannot connect to wallet."
+  },
+  "games": {
+    "active_players": "{0} players online",
+    "difficulty": {
+      "easy": "Easy",
+      "hard": "Hard",
+      "medium": "Medium"
+    },
+    "join_room": "Join Room",
+    "leaderboard": "Leaderboard",
+    "max_players": "Max {0} players",
+    "play_now": "Play Now",
+    "room_full": "Room Full",
+    "waiting_for_players": "Waiting for players..."
+  },
+  "magic_keys": {
+    "dialog_header": "Keyboard shortcuts",
+    "groups": {
+      "actions": {
+        "command_mode": "Command mode",
+        "search": "Search",
+        "title": "Actions"
+      },
+      "navigation": {
+        "go_to_chat": "Chat",
+        "go_to_games": "Games",
+        "go_to_home": "Home",
+        "go_to_profile": "Profile",
+        "go_to_rooms": "Rooms",
+        "go_to_search": "Search",
+        "go_to_settings": "Settings",
+        "shortcut_help": "Shortcut help",
+        "title": "Navigation"
+      }
+    },
+    "sequence_then": "then"
+  },
+  "menu": {
+    "toggle_theme": {
+      "dark": "Toggle dark mode",
+      "light": "Toggle light mode"
+    }
+  },
+  "modals": {
+    "aria_label_close": "Close"
+  },
+  "nav": {
+    "back": "Go back",
+    "built_at": "Built {0}",
+    "chat": "Chat",
+    "docs": "Documentation",
+    "games": "Games",
+    "home": "Home",
+    "leaderboard": "Leaderboard",
+    "more_menu": "More menu",
+    "profile": "Profile",
+    "rooms": "Rooms",
+    "search": "Search",
+    "select_font_size": "Font Size",
+    "select_language": "Display Language",
+    "settings": "Settings",
+    "toggle_theme": "Toggle Theme",
+    "wallet": "Wallet",
+    "zen_mode": "Zen Mode"
+  },
+  "pwa": {
+    "dismiss": "Dismiss",
+    "install": "Install",
+    "install_title": "Install Groopl",
+    "screenshots": {
+      "dark": "Screenshot of Groopl running in dark mode",
+      "light": "Screenshot of Groopl running in light mode"
+    },
+    "title": "New Groopl update available!",
+    "update": "Update",
+    "update_available_short": "Update Groopl",
+    "webmanifest": {
+      "canary": {
+        "description": "A social gaming platform on Hedera (canary)",
+        "name": "Groopl (canary)",
+        "short_name": "Groopl (canary)"
+      },
+      "dev": {
+        "description": "A social gaming platform on Hedera (dev)",
+        "name": "Groopl (dev)",
+        "short_name": "Groopl (dev)"
+      },
+      "preview": {
+        "description": "A social gaming platform on Hedera (preview)",
+        "name": "Groopl (preview)",
+        "short_name": "Groopl (preview)"
+      },
+      "release": {
+        "description": "A social gaming platform on Hedera",
+        "name": "Groopl",
+        "short_name": "Groopl"
+      }
+    }
+  },
+  "search": {
+    "search_desc": "Search for games & players",
+    "search_empty": "Could not find anything for these search terms"
+  },
+  "settings": {
+    "about": {
+      "built_at": "Built",
+      "label": "About",
+      "version": "Version"
+    },
+    "interface": {
+      "bottom_nav": "Bottom Navigation",
+      "bottom_nav_instructions": "Choose your favorite navigation buttons up to five for the bottom navigation. Must include the \"More menu\" button.",
+      "color_mode": "Color Mode",
+      "dark_mode": "Dark",
+      "default": " (default)",
+      "font_size": "Font Size",
+      "label": "Interface",
+      "light_mode": "Light",
+      "system_mode": "System",
+      "theme_color": "Theme Color"
+    },
+    "language": {
+      "display_language": "Display Language",
+      "label": "Language"
+    },
+    "preferences": {
+      "enable_sound_effects": "Sound Effects",
+      "enable_vibration": "Vibration Feedback",
+      "graphics_quality": "Graphics Quality",
+      "graphics_quality_high": "High",
+      "graphics_quality_low": "Low",
+      "graphics_quality_medium": "Medium",
+      "grayscale_mode": "Grayscale mode",
+      "label": "Preferences",
+      "show_fps_counter": "Show FPS Counter",
+      "show_player_usernames": "Show Player Usernames",
+      "title": "Game Preferences",
+      "wellbeing": "Wellbeing",
+      "zen_mode": "Zen mode",
+      "zen_mode_description": "Hide distractions during gameplay for better focus."
+    },
+    "select_a_settings": "Select a setting",
+    "wallet": {
+      "connected_wallet": "Connected Wallet",
+      "label": "Wallet",
+      "network": "Network",
+      "no_wallet_connected": "No wallet connected"
+    }
+  },
+  "wallet": {
+    "connect": "Connect Wallet",
+    "connected": "Wallet Connected",
+    "connecting": "Connecting...",
+    "disconnect": "Disconnect",
+    "select_provider": "Select a wallet provider",
+    "switch_account": "Switch Account"
+  }
+}
