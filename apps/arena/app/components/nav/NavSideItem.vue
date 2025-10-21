@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { isWalletConnected } from '~/composables/wallet/initialization'
+import { useWalletInterface } from '~/composables/wallet/useWalletInterface'
+
 const { text, icon, to, userOnly = false, command } = defineProps<{
   text?: string
   icon: string
@@ -37,7 +40,7 @@ onHydrated(async () => {
 
 // Optimize rendering for the common case of being logged in, only show visual feedback for disabled user-only items
 // when we know there is no wallet connected.
-const noUserDisable = computed(() => !isHydrated.value || (userOnly && !isWalletConnected.value))
+const noUserDisable = computed(() => !isHydrated.value || (userOnly && isWalletConnected.value))
 const noUserVisual = computed(() => isHydrated.value && userOnly && !isWalletConnected.value)
 </script>
 

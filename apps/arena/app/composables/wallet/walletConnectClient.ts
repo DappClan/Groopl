@@ -8,6 +8,7 @@ import EventEmitter from 'events'
 import { DAppConnector, HederaChainId, HederaJsonRpcMethod, HederaSessionEvent } from '@hashgraph/hedera-wallet-connect'
 import { AccountId, Client, ContractExecuteTransaction, LedgerId, TokenAssociateTransaction, TransferTransaction } from '@hashgraph/sdk'
 import { onMounted, onUnmounted, ref } from 'vue'
+
 import { appConfig } from '@/config'
 
 // Created refreshEvent because `dappConnector.walletConnectClient.on(eventName, syncWithWalletConnectContext)` would not call syncWithWalletConnectContext
@@ -56,6 +57,13 @@ export async function openWalletConnectModal() {
     refreshEvent.emit('sync')
   })
 }
+
+// Persist WalletConnect account in localStorage
+const walletConnectAccountId = import.meta.server
+  ? ref('')
+  : useLocalStorage('groopl-walletconnect-account', '')
+
+const walletConnectIsConnected: Ref<boolean> = ref(false)
 
 class WalletConnectWallet implements WalletInterface {
   private getSigner() {
@@ -130,10 +138,22 @@ class WalletConnectWallet implements WalletInterface {
     return txResult ? txResult.transactionId : null
   }
 
-  disconnect() {
-    dappConnector.disconnectAll().then(() => {
-      refreshEvent.emit('sync')
-    })
+  async disconnect() {
+    await dappConnector.disconnectAll()
+    refreshEvent.emit('sync')
+
+    // Clear account state
+    walletConnectAccountId.value = ''
+    walletConnectIsConnected.value = false
+
+    // Update wallet connection state
+    const { setWalletDisconnected } = await import('./initialization')
+    setWalletDisconnected()
+
+    // Navigate to landing page
+    if (import.meta.client) {
+      await navigateTo('/')
+    }
   }
 }
 
@@ -141,19 +161,24 @@ export const walletConnectWallet = new WalletConnectWallet()
 
 // Vue Composable for WalletConnect
 export function useWalletConnect() {
-  const accountId: Ref<string> = ref('')
-  const isConnected: Ref<boolean> = ref(false)
-
   // sync the walletconnect state with the reactive refs
-  const syncWithWalletConnectContext = () => {
+  const syncWithWalletConnectContext = async () => {
+    const { setWalletConnected, setWalletDisconnected } = await import('./initialization')
     const currentAccountId = dappConnector.signers[0]?.getAccountId()?.toString()
     if (currentAccountId) {
-      accountId.value = currentAccountId
-      isConnected.value = true
+      walletConnectAccountId.value = currentAccountId
+      walletConnectIsConnected.value = true
+      setWalletConnected()
     }
     else {
-      accountId.value = ''
-      isConnected.value = false
+      walletConnectAccountId.value = ''
+      walletConnectIsConnected.value = false
+      setWalletDisconnected()
+
+      // Navigate to landing page if disconnected
+      if (import.meta.client) {
+        await navigateTo('/')
+      }
     }
   }
 
@@ -162,11 +187,22 @@ export function useWalletConnect() {
   }
 
   onMounted(async () => {
+    const { setWalletConnecting, setWalletInitialized } = await import('./initialization')
+    setWalletConnecting()
+
     // Sync after walletconnect finishes initializing
     refreshEvent.addListener('sync', handleSync)
 
-    await initializeWalletConnect()
-    syncWithWalletConnectContext()
+    try {
+      await initializeWalletConnect()
+      await syncWithWalletConnectContext()
+    }
+    catch (error) {
+      console.error('WalletConnect initialization error:', error)
+    }
+    finally {
+      setWalletInitialized()
+    }
   })
 
   onUnmounted(() => {
@@ -174,7 +210,10 @@ export function useWalletConnect() {
   })
 
   return {
-    accountId,
-    isConnected,
+    accountId: walletConnectAccountId,
+    isConnected: walletConnectIsConnected,
   }
 }
+
+// Export the module-level refs for direct access in other composables
+export { walletConnectAccountId, walletConnectIsConnected }

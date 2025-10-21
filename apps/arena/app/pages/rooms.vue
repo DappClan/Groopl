@@ -1,7 +1,5 @@
 <script setup lang="ts">
-definePageMeta({
-  middleware: 'auth',
-})
+import { isWalletConnected } from '~/composables/wallet/initialization'
 
 useHydratedHead({
   title: 'Rooms',

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { isWalletConnected } from '~/composables/wallet/initialization'
+
 useHydratedHead({
   title: 'Home',
 })

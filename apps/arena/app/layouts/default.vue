@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { usePreferences } from '~/composables/settings'
+import { isWalletConnected } from '~/composables/wallet/initialization'
 
 const route = useRoute()
 
@@ -34,7 +35,7 @@ const isConnected = isWalletConnected
                         <div flex="~ col" p-3 gap-2>
                           <div flex gap-2 items-center>
                             <div bg-primary-500 text-white font-bold rounded-full flex h-10 w-10 items-center justify-center>
-                              {{ wallet.connection.accountId.split('.')[2].slice(0, 2) }}
+                              {{ wallet.connection.accountId.slice(0, 2) }}
                             </div>
                             <div flex="~ col" min-w-0>
                               <span text-sm font-semibold truncate>{{ wallet.profile?.username || 'Player' }}</span>
@@ -55,7 +56,7 @@ const isConnected = isWalletConnected
                       to="/profile"
                       bg-primary-500 text-white font-bold rounded-full flex h-10 w-10 items-center justify-center
                     >
-                      {{ wallet.connection.accountId.split('.')[2].slice(0, 2) }}
+                      {{ wallet.connection.accountId.slice(0, 2) }}
                     </NuxtLink>
                   </div>
                 </div>

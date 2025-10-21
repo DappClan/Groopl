@@ -10,6 +10,7 @@ import {
   STORAGE_KEY_TOKEN_BALANCES,
   STORAGE_KEY_WALLETS,
 } from '~/constants'
+import { isWalletConnected } from './wallet/initialization'
 
 export interface WalletConnection {
   accountId: string // "0.0.12345"
@@ -70,15 +71,16 @@ export function useHederaNetwork() {
 }
 
 // Token balances cache (updated periodically)
-const tokenBalancesCache = useLocalStorage<Record<string, TokenBalance[]>>(
+const _tokenBalancesCache = useLocalStorage<Record<string, TokenBalance[]>>(
   STORAGE_KEY_TOKEN_BALANCES,
   {},
   { deep: true },
 )
 
-export const currentWallet = computed<WalletSession | undefined>(() => {
-  const { accountId: walletAccountId } = useWalletInterface()
+const { accountId: walletAccountId } = useWalletInterface()
 
+export const currentWallet = computed<WalletSession | undefined>(() => {
+  console.log(walletAccountId)
   // Sync with actual wallet interface
   if (walletAccountId.value) {
     const accountId = walletAccountId.value
@@ -113,10 +115,6 @@ export const currentWallet = computed<WalletSession | undefined>(() => {
 export const connectedWallet = computed(() => currentWallet.value?.connection)
 export const playerProfile = computed(() => currentWallet.value?.profile)
 export const hbarBalance = computed(() => currentWallet.value?.hbarBalance ?? '0')
-export const isWalletConnected = computed(() => {
-  const { accountId } = useWalletInterface()
-  return !!accountId.value
-})
 
 export const currentNetworkConfig = computed<NetworkConfig>(() => {
   return networkConfig[hederaNetwork.value]

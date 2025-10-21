@@ -3,6 +3,7 @@ import type { ComputedRef } from 'vue'
 import Fuse from 'fuse.js'
 import { defineStore } from 'pinia'
 import { togglePreferences, useUserSettings } from './settings'
+import { isWalletConnected } from './wallet/initialization'
 
 // @unocss-include
 

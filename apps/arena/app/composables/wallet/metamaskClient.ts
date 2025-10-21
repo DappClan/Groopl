@@ -1,5 +1,4 @@
 import type { AccountId, TokenId } from '@hashgraph/sdk'
-import type { Ref } from 'vue'
 import type { WalletInterface } from '@/utils/walletInterface'
 import { ContractId } from '@hashgraph/sdk'
 import { ethers } from 'ethers'
@@ -80,6 +79,11 @@ export async function connectToMetamask() {
 
   return accounts
 }
+
+// Persist MetaMask account address in localStorage
+const metamaskAccountAddress = import.meta.server
+  ? ref('')
+  : useLocalStorage('groopl-metamask-account', '')
 
 class MetaMaskWallet implements WalletInterface {
   private convertAccountIdToSolidityAddress(accountId: AccountId): string {
@@ -203,34 +207,57 @@ class MetaMaskWallet implements WalletInterface {
     }
   }
 
-  disconnect() {
-    // eslint-disable-next-line no-alert
-    alert('Please disconnect using the Metamask extension.')
+  async disconnect() {
+    // Clear the MetaMask account state
+    metamaskAccountAddress.value = ''
+
+    // Update wallet connection state
+    const { setWalletDisconnected } = await import('./initialization')
+    setWalletDisconnected()
+
+    // Navigate to landing page
+    if (import.meta.client) {
+      await navigateTo('/')
+    }
   }
 }
+
+// Module-level ref for MetaMask account (shared across all uses)
 
 export const metamaskWallet = new MetaMaskWallet()
 
 // Vue Composable for MetaMask
 export function useMetaMask() {
-  const metamaskAccountAddress: Ref<string> = ref('')
+  const handleAccountsChanged = async (accounts: string[]) => {
+    const { setWalletConnected, setWalletDisconnected } = await import('./initialization')
 
-  const handleAccountsChanged = (accounts: string[]) => {
     if (accounts.length !== 0) {
       metamaskAccountAddress.value = accounts[0]!
+      setWalletConnected()
     }
     else {
+      // User disconnected their wallet via MetaMask extension
       metamaskAccountAddress.value = ''
+      setWalletDisconnected()
+
+      // Navigate to landing page
+      if (import.meta.client) {
+        await navigateTo('/')
+      }
     }
   }
 
   onMounted(async () => {
+    const { setWalletConnecting, setWalletConnected, setWalletInitialized } = await import('./initialization')
+    setWalletConnecting()
+
     try {
       const provider = getProvider()
       const signers = await provider.listAccounts()
 
       if (signers.length !== 0) {
-        metamaskAccountAddress.value = signers[0] as unknown as string
+        metamaskAccountAddress.value = signers[0].address
+        setWalletConnected()
       }
       else {
         metamaskAccountAddress.value = ''
@@ -241,6 +268,9 @@ export function useMetaMask() {
     }
     catch (error: any) {
       console.error(error.message ? error.message : error)
+    }
+    finally {
+      setWalletInitialized()
     }
   })
 
@@ -257,3 +287,6 @@ export function useMetaMask() {
     metamaskAccountAddress,
   }
 }
+
+// Export the module-level ref for direct access in other composables
+export { metamaskAccountAddress }

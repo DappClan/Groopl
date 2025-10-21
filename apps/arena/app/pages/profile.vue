@@ -1,7 +1,5 @@
 <script setup lang="ts">
-definePageMeta({
-  middleware: 'auth',
-})
+import { isWalletConnected } from '~/composables/wallet/initialization'
 
 useHydratedHead({
   title: 'Profile',
@@ -22,7 +20,7 @@ useHydratedHead({
             bg-primary-500 text-white font-bold rounded-full
             flex h-24 w-24 items-center justify-center text-3xl
           >
-            {{ currentWallet.connection.accountId.split('.')[2].slice(0, 2) }}
+            {{ currentWallet.connection.accountId.slice(0, 2) }}
           </div>
           <div flex="~ col" gap-2 flex-1>
             <h2 text-2xl font-bold>
