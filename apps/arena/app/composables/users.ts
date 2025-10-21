@@ -80,7 +80,6 @@ const _tokenBalancesCache = useLocalStorage<Record<string, TokenBalance[]>>(
 const { accountId: walletAccountId } = useWalletInterface()
 
 export const currentWallet = computed<WalletSession | undefined>(() => {
-  console.log(walletAccountId)
   // Sync with actual wallet interface
   if (walletAccountId.value) {
     const accountId = walletAccountId.value

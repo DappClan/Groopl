@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { usePreferences } from '~/composables/settings'
 import { isWalletConnected } from '~/composables/wallet/initialization'
+import { useWalletInterface } from '~/composables/wallet/useWalletInterface'
 
 const route = useRoute()
 
@@ -11,6 +12,15 @@ const networkInfo = useHederaNetwork()
 // Wallet state from composables/users.ts
 const wallet = currentWallet
 const isConnected = isWalletConnected
+
+// Wallet interface for disconnect
+// const { walletInterface } = useWalletInterface()
+
+// async function handleDisconnect() {
+//   if (walletInterface.value) {
+//     await walletInterface.value.disconnect()
+//   }
+// }
 </script>
 
 <template>
@@ -27,6 +37,20 @@ const isConnected = isWalletConnected
                 <!-- Wallet Connection Section -->
                 <div v-if="isConnected && wallet" p6 pb8 w-full>
                   <div hidden xl-block>
+                    <!-- Disconnect Button -->
+                    <!-- <button
+                      type="button"
+                      w-full
+                      mb-2
+                      btn-text
+                      text-xs
+                      rounded-2
+                      @click="handleDisconnect"
+                    >
+                      <span i-ri:logout-box-r-line mr-1 />
+                      Disconnect Wallet
+                    </button> -->
+
                     <div flex="~" items-center justify-between>
                       <NuxtLink
                         hover:bg-active text-primary text-start rounded-3 w-full hidden cursor-pointer transition-100 xl:block
@@ -51,7 +75,19 @@ const isConnected = isWalletConnected
                     </div>
                   </div>
                   <!-- Mobile compact view -->
-                  <div xl:hidden>
+                  <div xl:hidden flex="~ col" gap-2>
+                    <!-- <button
+                      type="button"
+                      w-full
+                      btn-text
+                      text-xs
+                      rounded-2
+                      @click="handleDisconnect"
+                    >
+                      <span i-ri:logout-box-r-line mr-1 />
+                      Disconnect
+                    </button> -->
+
                     <NuxtLink
                       to="/profile"
                       bg-primary-500 text-white font-bold rounded-full flex h-10 w-10 items-center justify-center
