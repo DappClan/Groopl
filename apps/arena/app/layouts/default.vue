@@ -65,7 +65,7 @@ const isConnected = isWalletConnected
           </slot>
         </div>
       </aside>
-      <div :class="isHydrated && wideLayout ? 'xl:w-full sm:w-600px' : 'sm:w-600px md:shrink-0'" border-base min-h-screen w-full>
+      <div :class="isHydrated && wideLayout ? 'xl:w-full sm:w-600px' : 'sm:w-600px md:shrink-0'" sm:border-x border-base min-h-screen w-full>
         <div min-h="[calc(100vh-3.5rem)]" sm:min-h-screen>
           <slot />
         </div>

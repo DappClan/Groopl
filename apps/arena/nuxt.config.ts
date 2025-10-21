@@ -14,7 +14,6 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxtjs/i18n',
     '@unlazy/nuxt',
-    '@nuxt/eslint',
     ...(isDevelopment || isWindows) ? [] : ['nuxt-security'],
   ],
   i18n: {

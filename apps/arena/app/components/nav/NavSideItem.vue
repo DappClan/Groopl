@@ -48,7 +48,7 @@ const noUserVisual = computed(() => isHydrated.value && userOnly && !isWalletCon
     :class="noUserVisual ? 'op25 pointer-events-none ' : ''"
     :active-class="activeClass"
     group focus:outline-none disabled:pointer-events-none
-    :tabindex="noUserDisable ? -1 : null"
+    :tabindex="noUserDisable ? -1 : undefined"
     @click="$scrollToTop"
   >
     <CommonTooltip :disabled="!isMediumOrLargeScreen" :content="text" placement="right">
@@ -66,7 +66,7 @@ const noUserVisual = computed(() => isHydrated.value && userOnly && !isWalletCon
             w-fit rounded-3
             px2 mx3 sm:mxa
             transition-100
-            elk-group-hover-bg-active
+            groopl-group-hover-bg-active
             group-focus-visible:ring-2
             group-focus-visible:ring-current
           `"
