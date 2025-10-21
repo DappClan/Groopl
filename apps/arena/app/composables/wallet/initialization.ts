@@ -1,4 +1,5 @@
 // Track wallet initialization and connection state with localStorage persistence
+// Synced with wagmi connection state via plugin
 export const isWalletConnected = import.meta.server
   ? ref(false)
   : useLocalStorage('groopl-wallet-connected', false)

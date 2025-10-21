@@ -1,4 +1,5 @@
 import type { RouteLocationNormalized } from 'vue-router'
+import { isInitializingWallet, onWalletInitialized } from '~/composables/wallet/initialization'
 
 export default defineNuxtRouteMiddleware(async (to) => {
   if (import.meta.server)
@@ -10,7 +11,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   // Wait for wallet initialization to complete
-  const { isInitializingWallet, onWalletInitialized } = await import('~/composables/wallet/initialization')
   if (isInitializingWallet.value) {
     await new Promise<void>(resolve => onWalletInitialized(() => resolve()))
   }
@@ -19,12 +19,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
 })
 
 async function handleAuth(to: RouteLocationNormalized) {
-  // Import the persisted wallet connection state
-  const { isWalletConnected } = await import('~/composables/wallet/initialization')
-
-
   const isConnected = isWalletConnected.value
-
 
   // NOT connected: Only allow landing page (/)
   if (!isConnected) {

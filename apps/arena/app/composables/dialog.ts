@@ -1,22 +1,10 @@
-import { useWalletInterface } from '~/composables/wallet/useWalletInterface'
+// Web3 Connect dialog state (new wagmi-based)
+export const isWeb3ConnectDialogOpen = ref(false)
 
-// Wallet dialog state
-export const isWalletDialogOpen = ref(false)
-
-export function openWalletDialog() {
-  isWalletDialogOpen.value = true
+export function openWeb3ConnectDialog() {
+  isWeb3ConnectDialogOpen.value = true
 }
 
-export function closeWalletDialog() {
-  isWalletDialogOpen.value = false
-}
-
-// Auto-close wallet dialog when account connects
-if (import.meta.client) {
-  const { accountId } = useWalletInterface()
-  watch(accountId, (newAccountId) => {
-    if (newAccountId && isWalletDialogOpen.value) {
-      closeWalletDialog()
-    }
-  })
+export function closeWeb3ConnectDialog() {
+  isWeb3ConnectDialogOpen.value = false
 }

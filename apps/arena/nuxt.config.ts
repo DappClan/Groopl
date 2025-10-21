@@ -94,6 +94,15 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig: {
+    public: {
+      walletConnectProjectId: 'b4f4105bb6bd033f84249000959fd12c',
+      env: {
+        node: process.env.NODE_ENV,
+        build: process.env.BUILD_ENV,
+      },
+    },
+  },
   typescript: {
     tsConfig: {
       exclude: ['../service-worker'],

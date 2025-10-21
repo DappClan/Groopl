@@ -1,15 +1,27 @@
 <script setup lang="ts">
-import { useWalletInterface } from '@/composables/wallet/useWalletInterface'
-import { openWalletDialog } from '~/composables/dialog'
+import { useAccount } from 'use-wagmi'
+import { openWeb3ConnectDialog } from '~/composables/dialog'
 
-const { accountId, walletInterface } = useWalletInterface()
+const isConnected = ref(false)
+
+onMounted(async () => {
+  if (import.meta.client) {
+    const account = useAccount()
+
+    isConnected.value = account.isConnected.value
+
+    // Watch for changes
+    watch(account.isConnected, val => isConnected.value = val)
+  }
+})
 
 function handleConnect() {
-  if (accountId.value) {
-    walletInterface.value?.disconnect()
+  if (!isConnected.value) {
+    openWeb3ConnectDialog()
   }
   else {
-    openWalletDialog()
+    // Navigate to home if already connected
+    navigateTo('/home')
   }
 }
 </script>
@@ -50,7 +62,7 @@ function handleConnect() {
           @click="handleConnect"
         >
           <span aria-hidden="true" block i-ri:gamepad-line />
-          Start Playing Now
+          {{ isConnected ? 'Start Playing' : 'Start Playing Now' }}
         </button>
       </div>
     </div>

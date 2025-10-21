@@ -1,7 +1,6 @@
 <script setup lang="ts">
+import { useAccount } from 'use-wagmi'
 import { usePreferences } from '~/composables/settings'
-import { isWalletConnected } from '~/composables/wallet/initialization'
-import { useWalletInterface } from '~/composables/wallet/useWalletInterface'
 
 const route = useRoute()
 
@@ -9,18 +8,22 @@ const wideLayout = computed(() => route.meta.wideLayout ?? false)
 const isGrayscale = usePreferences('grayscaleMode')
 const networkInfo = useHederaNetwork()
 
+// Wallet state from use-wagmi
+const isConnected = ref(false)
+
+onMounted(async () => {
+  if (import.meta.client) {
+    const account = useAccount()
+
+    isConnected.value = account.isConnected.value
+
+    // Watch for changes
+    watch(account.isConnected, val => isConnected.value = val)
+  }
+})
+
 // Wallet state from composables/users.ts
 const wallet = currentWallet
-const isConnected = isWalletConnected
-
-// Wallet interface for disconnect
-// const { walletInterface } = useWalletInterface()
-
-// async function handleDisconnect() {
-//   if (walletInterface.value) {
-//     await walletInterface.value.disconnect()
-//   }
-// }
 </script>
 
 <template>
@@ -36,20 +39,9 @@ const isConnected = isWalletConnected
               <div v-if="isHydrated" bg-base flex flex-col bottom-0 sticky>
                 <!-- Wallet Connection Section -->
                 <div v-if="isConnected && wallet" p6 pb8 w-full>
-                  <div hidden xl-block>
+                  <div hidden xl:block>
                     <!-- Disconnect Button -->
-                    <!-- <button
-                      type="button"
-                      w-full
-                      mb-2
-                      btn-text
-                      text-xs
-                      rounded-2
-                      @click="handleDisconnect"
-                    >
-                      <span i-ri:logout-box-r-line mr-1 />
-                      Disconnect Wallet
-                    </button> -->
+                    <ConnectButton />
 
                     <div flex="~" items-center justify-between>
                       <NuxtLink
@@ -173,6 +165,6 @@ const isConnected = isWalletConnected
         </div>
       </aside>
     </main>
-    <ModalContainer />
+    <ModalWeb3Connect />
   </div>
 </template>

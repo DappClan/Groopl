@@ -1,7 +1,6 @@
 import type { MaybeRefOrGetter, RemovableRef } from '@vueuse/core'
 import type { EffectScope, Ref } from 'vue'
 import type { NetworkConfig, NetworkName } from '~/config'
-import { useWalletInterface } from '~/composables/wallet/useWalletInterface'
 import { appConfig } from '~/config'
 import { networkConfig } from '~/config/networks'
 import {
@@ -10,13 +9,12 @@ import {
   STORAGE_KEY_TOKEN_BALANCES,
   STORAGE_KEY_WALLETS,
 } from '~/constants'
-import { isWalletConnected } from './wallet/initialization'
 
 export interface WalletConnection {
   accountId: string // "0.0.12345"
   evmAddress?: string // "0x..." (for Metamask)
   network: 'mainnet' | 'testnet' | 'previewnet'
-  provider: 'walletconnect' | 'metamask' | 'blade' | 'hashpack'
+  provider: 'walletconnect' | 'metamask' | 'blade' | 'hashpack' | 'wagmi'
   publicKey: string
   connectedAt: number // timestamp
 }
@@ -54,11 +52,10 @@ const walletSessions: Ref<WalletSession[]> | RemovableRef<WalletSession[]>
     ? ref<WalletSession[]>([])
     : useLocalStorage<WalletSession[]>(STORAGE_KEY_WALLETS, [], { deep: true })
 
-// Current active wallet account ID
-export const currentWalletAccountId = useLocalStorage<string>(
-  STORAGE_KEY_CURRENT_WALLET,
-  '',
-)
+// Current active wallet account ID - synced with wagmi via plugin
+export const currentWalletAccountId = import.meta.server
+  ? ref('')
+  : useLocalStorage<string>(STORAGE_KEY_CURRENT_WALLET, '')
 
 // Hedera network selection
 export const hederaNetwork = useLocalStorage<NetworkName>(
@@ -77,12 +74,12 @@ const _tokenBalancesCache = useLocalStorage<Record<string, TokenBalance[]>>(
   { deep: true },
 )
 
-const { accountId: walletAccountId } = useWalletInterface()
-
 export const currentWallet = computed<WalletSession | undefined>(() => {
+  // Use the module-level ref directly from wagmi
+  const accountId = currentWalletAccountId.value
+
   // Sync with actual wallet interface
-  if (walletAccountId.value) {
-    const accountId = walletAccountId.value
+  if (accountId) {
     const sessions = walletSessions.value
 
     const session = sessions.find(s => s.connection.accountId === accountId || s.connection.evmAddress === accountId)
@@ -96,7 +93,7 @@ export const currentWallet = computed<WalletSession | undefined>(() => {
         accountId,
         evmAddress: accountId.startsWith('0x') ? accountId : undefined,
         network: hederaNetwork.value,
-        provider: accountId.startsWith('0x') ? 'metamask' : 'walletconnect',
+        provider: 'wagmi',
         publicKey: '',
         connectedAt: Date.now(),
       },
@@ -114,6 +111,7 @@ export const currentWallet = computed<WalletSession | undefined>(() => {
 export const connectedWallet = computed(() => currentWallet.value?.connection)
 export const playerProfile = computed(() => currentWallet.value?.profile)
 export const hbarBalance = computed(() => currentWallet.value?.hbarBalance ?? '0')
+export const isWalletConnected = computed(() => !!currentWallet.value)
 
 export const currentNetworkConfig = computed<NetworkConfig>(() => {
   return networkConfig[hederaNetwork.value]
