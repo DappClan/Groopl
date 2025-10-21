@@ -71,6 +71,7 @@ const isConnected = isWalletConnected
         </div>
         <div bg-base bottom-0 left-0 right-0 sticky z-10 pb="[env(safe-area-inset-bottom)]" transition="padding 20">
           <CommonOfflineChecker v-if="isHydrated" />
+          <NavBottom v-if="isHydrated" sm:hidden />
         </div>
       </div>
       <aside v-if="isHydrated && !wideLayout" class="sm:none zen-hide hidden lg:w-1/5 xl:w-1/4 xl:block">

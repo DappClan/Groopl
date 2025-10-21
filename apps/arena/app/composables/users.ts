@@ -1,6 +1,7 @@
 import type { MaybeRefOrGetter, RemovableRef } from '@vueuse/core'
 import type { EffectScope, Ref } from 'vue'
 import type { NetworkConfig, NetworkName } from '~/config'
+import { useWalletInterface } from '~/composables/wallet/useWalletInterface'
 import { appConfig } from '~/config'
 import { networkConfig } from '~/config/networks'
 import {
@@ -76,24 +77,46 @@ const tokenBalancesCache = useLocalStorage<Record<string, TokenBalance[]>>(
 )
 
 export const currentWallet = computed<WalletSession | undefined>(() => {
-  const accountId = currentWalletAccountId.value
-  const sessions = walletSessions.value
+  const { accountId: walletAccountId } = useWalletInterface()
 
-  if (accountId) {
-    const session = sessions.find(s => s.connection.accountId === accountId)
-    if (session)
+  // Sync with actual wallet interface
+  if (walletAccountId.value) {
+    const accountId = walletAccountId.value
+    const sessions = walletSessions.value
+
+    const session = sessions.find(s => s.connection.accountId === accountId || s.connection.evmAddress === accountId)
+    if (session) {
       return session
+    }
+
+    // Create a temporary session if wallet is connected but no session exists
+    return {
+      connection: {
+        accountId,
+        evmAddress: accountId.startsWith('0x') ? accountId : undefined,
+        network: hederaNetwork.value,
+        provider: accountId.startsWith('0x') ? 'metamask' : 'walletconnect',
+        publicKey: '',
+        connectedAt: Date.now(),
+      },
+      hbarBalance: '0',
+      tokenBalances: {},
+      nftIds: [],
+      lastBalanceUpdate: Date.now(),
+    }
   }
 
-  // Fallback to first wallet if available
-  return sessions.length ? sessions[0] : undefined
+  return undefined
 })
 
 // Helper computed properties for easy access
 export const connectedWallet = computed(() => currentWallet.value?.connection)
 export const playerProfile = computed(() => currentWallet.value?.profile)
 export const hbarBalance = computed(() => currentWallet.value?.hbarBalance ?? '0')
-export const isWalletConnected = computed(() => !!currentWallet.value)
+export const isWalletConnected = computed(() => {
+  const { accountId } = useWalletInterface()
+  return !!accountId.value
+})
 
 export const currentNetworkConfig = computed<NetworkConfig>(() => {
   return networkConfig[hederaNetwork.value]
@@ -186,142 +209,4 @@ export function clearWalletLocalStorage(accountId?: string) {
     if (value.value[accountId!])
       delete value.value[accountId!]
   })
-}
-
-/**
- * Switch to a different wallet
- * @param session - Wallet session to switch to
- */
-export async function switchWallet(session: WalletSession) {
-  currentWalletAccountId.value = session.connection.accountId
-
-  // Optionally navigate if needed
-  const route = useRoute()
-  const router = useRouter()
-
-  // You can add custom navigation logic here if needed
-  // For now, we'll just update the active wallet
-}
-
-/**
- * Disconnect current wallet
- */
-export async function disconnectWallet() {
-  if (!currentWallet.value)
-    return
-
-  const accountId = currentWallet.value.connection.accountId
-  const index = walletSessions.value.findIndex(s => s.connection.accountId === accountId)
-
-  if (index !== -1) {
-    // Clear wallet-specific storage
-    clearWalletLocalStorage(accountId)
-
-    // Remove the wallet from sessions
-    walletSessions.value.splice(index, 1)
-  }
-
-  // Set to next wallet or clear
-  currentWalletAccountId.value = walletSessions.value[0]?.connection.accountId || ''
-
-  // Navigate to home if no wallets remain
-  if (!currentWalletAccountId.value) {
-    await useRouter().push('/')
-  }
-}
-
-export async function connectWallet(
-  provider: 'walletconnect' | 'metamask',
-): Promise<WalletSession | null> {
-  try {
-    let connection: WalletConnection | null = null
-
-    // Step 1: Connect based on provider
-    switch (provider) {
-      case 'walletconnect':
-        connection = await connectViaWalletConnect()
-        break
-      case 'metamask':
-        connection = await connectViaMetamask()
-        break
-    }
-
-    if (!connection) {
-      throw new Error('Failed to connect wallet')
-    }
-
-    // Step 2: Fetch balances from Hedera Mirror Node
-    const [hbarBalance, tokenBalances, nftIds] = await Promise.all([
-      fetchHbarBalance(connection.accountId),
-      fetchTokenBalances(connection.accountId),
-      fetchNFTs(connection.accountId),
-    ])
-
-    // Step 3: Fetch or create player profile from your backend
-    const profile = await fetchOrCreatePlayerProfile(connection.accountId)
-
-    // Step 4: Create wallet session
-    const session: WalletSession = {
-      connection,
-      profile,
-      hbarBalance,
-      tokenBalances,
-      nftIds,
-      lastBalanceUpdate: Date.now(),
-    }
-
-    // Step 5: Check if wallet already exists in sessions
-    const existingIndex = walletSessions.value.findIndex(
-      s => s.connection.accountId === connection.accountId,
-    )
-
-    if (existingIndex !== -1) {
-      // Update existing session
-      walletSessions.value[existingIndex] = session
-    }
-    else {
-      // Add new session
-      walletSessions.value.push(session)
-    }
-
-    // Step 6: Set as current wallet
-    currentWalletAccountId.value = connection.accountId
-
-    return session
-  }
-  catch (error) {
-    console.error('Wallet connection failed:', error)
-    return null
-  }
-}
-
-// Placeholder functions - implement these based on your wallet integration
-async function connectViaWalletConnect(): Promise<WalletConnection | null> {
-  // TODO: Implement WalletConnect integration
-  throw new Error('WalletConnect not implemented yet')
-}
-
-async function connectViaMetamask(): Promise<WalletConnection | null> {
-  // TODO: Implement Metamask integration
-  throw new Error('Metamask not implemented yet')
-}
-
-async function fetchHbarBalance(accountId: string): Promise<string> {
-  // TODO: Fetch from Hedera Mirror Node
-  return '0'
-}
-
-async function fetchTokenBalances(accountId: string): Promise<Record<string, string>> {
-  // TODO: Fetch from Hedera Mirror Node
-  return {}
-}
-
-async function fetchNFTs(accountId: string): Promise<string[]> {
-  // TODO: Fetch from Hedera Mirror Node
-  return []
-}
-
-async function fetchOrCreatePlayerProfile(accountId: string): Promise<PlayerProfile | undefined> {
-  // TODO: Fetch from your backend or create new profile
-  return undefined
 }

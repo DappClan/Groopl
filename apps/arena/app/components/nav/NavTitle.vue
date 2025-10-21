@@ -2,10 +2,10 @@
 const router = useRouter()
 const back = ref<any>('')
 
-// const nuxtApp = useNuxtApp()
+const nuxtApp = useNuxtApp()
 
 function onClickLogo() {
-  // nuxtApp.hooks.callHook('elk-logo:click')
+  nuxtApp.hooks.callHook('groopl-logo:click')
 }
 
 onMounted(() => {

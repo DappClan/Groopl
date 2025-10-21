@@ -111,22 +111,24 @@ export default defineNuxtConfig({
       'postcss-nested': {},
     },
   },
-
-  eslint: {
-    config: {
-      standalone: false,
-      nuxt: {
-        sortConfigKeys: true,
-      },
-    },
-  },
   macros: {
     setupSFC: true,
     betterDefine: false,
     defineModels: false,
     reactivityTransform: false,
   },
-
+  routeRules: {
+    // Static generation
+    '/': { prerender: true },
+    '/settings/**': { prerender: false },
+    // CDN cache rules
+    '/manifest.webmanifest': {
+      headers: {
+        'Content-Type': 'application/manifest+json',
+        'Cache-Control': 'public, max-age=0, must-revalidate',
+      },
+    },
+  },
   vite: {
     define: {
       'process.env.VSCODE_TEXTMATE_DEBUG': 'false',
