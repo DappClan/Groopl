@@ -20,7 +20,7 @@ export const STORAGE_KEY_BOTTOM_NAV_BUTTONS = 'groopl-bottom-nav-buttons'
 export const NOTIFICATION_FILTER_TYPES = ['status', 'reblog', 'invite', 'friend_request', 'favourite', 'poll', 'update', 'admin.sign_up', 'admin.report']
 
 export const THEME_COLORS = {
-  defaultTheme: '#cc7d24',
+  defaultTheme: '#e65da9',
   themeDark: '#111111',
   themeLight: '#fafafa',
   backgroundDark: '#fafafa',

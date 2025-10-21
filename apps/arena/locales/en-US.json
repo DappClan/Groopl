@@ -228,7 +228,7 @@
     "connected": "Wallet Connected",
     "connecting": "Connecting...",
     "disconnect": "Disconnect",
-    "select_provider": "Select a wallet provider",
+    "select_provider": "Connect Wallet",
     "switch_account": "Switch Account"
   }
 }

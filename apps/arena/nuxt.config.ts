@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     detectBrowserLanguage: false,
     // relative to i18n dir on rootDir: not yet v4 compat layout
     langDir: '../locales',
-    defaultLocale: 'en-US',
+    defaultLocale: 'en',
     vueI18n: '../config/i18n.config.ts',
   },
   devtools: {
