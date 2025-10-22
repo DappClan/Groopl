@@ -25,10 +25,7 @@
   },
   "resolutions": {
     "@nuxt/devtools": "catalog:build",
-    "@nuxt/kit": "catalog:build",
-    "nuxt": "catalog:build",
-    "unplugin": "catalog:build",
-    "vite": "catalog:build"
+    "nuxt": "catalog:build"
   },
   "config": {
     "commitizen": {
