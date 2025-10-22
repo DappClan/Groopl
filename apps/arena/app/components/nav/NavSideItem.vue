@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { isWalletConnected } from '~/composables/wallet/initialization'
-import { useWalletInterface } from '~/composables/wallet/useWalletInterface'
 
 const { text, icon, to, userOnly = false, command } = defineProps<{
   text?: string

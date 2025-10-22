@@ -8,7 +8,8 @@ export const isInitializingWallet = ref(false)
 
 export function onWalletInitialized(cb: () => unknown) {
   watchOnce(isInitializingWallet, () => {
-    if (!isInitializingWallet.value) cb()
+    if (!isInitializingWallet.value)
+      cb()
   }, { immediate: !isInitializingWallet.value })
 }
 
