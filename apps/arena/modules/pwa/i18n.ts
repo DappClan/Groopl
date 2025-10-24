@@ -16,7 +16,7 @@ type RequiredWebManifestEntry = Required<WebManifestEntry & Pick<ManifestOptions
 export async function createI18n(): Promise<LocalizedWebManifest> {
   const { env } = await getEnv()
   const envName = `${env === 'release' ? '' : `(${env})`}`
-  const { action, nav, pwa } = await readI18nFile('en.json')
+  const { nav, pwa } = await readI18nFile('en.json')
 
   const defaultManifest: Required<WebManifestEntry> = pwa.webmanifest[env]
 
@@ -26,27 +26,6 @@ export async function createI18n(): Promise<LocalizedWebManifest> {
     icons: [
       { src: 'shortcuts/home-96x96.png', sizes: '96x96', type: 'image/png' },
       { src: 'shortcuts/home.png', sizes: '192x192', type: 'image/png' },
-    ],
-  }, {
-    name: nav.local,
-    url: '/?local-pwa-shortcut=true',
-    icons: [
-      { src: 'shortcuts/local-96x96.png', sizes: '96x96', type: 'image/png' },
-      { src: 'shortcuts/local.png', sizes: '192x192', type: 'image/png' },
-    ],
-  }, {
-    name: nav.notifications,
-    url: '/?notifications-pwa-shortcut=true',
-    icons: [
-      { src: 'shortcuts/notifications-96x96.png', sizes: '96x96', type: 'image/png' },
-      { src: 'shortcuts/notifications.png', sizes: '192x192', type: 'image/png' },
-    ],
-  }, {
-    name: action.compose,
-    url: '/compose',
-    icons: [
-      { src: 'shortcuts/compose-96x96.png', sizes: '96x96', type: 'image/png' },
-      { src: 'shortcuts/compose.png', sizes: '192x192', type: 'image/png' },
     ],
   }, {
     name: nav.settings,

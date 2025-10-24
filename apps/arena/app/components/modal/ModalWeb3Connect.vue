@@ -3,13 +3,13 @@ import { useAccount, useConnect } from 'use-wagmi'
 import { isWeb3ConnectDialogOpen } from '~/composables/dialog'
 
 const images: Record<string, string> = {
-  'Brave Wallet': '/media/brave.svg',
-  'Coinbase Wallet': '/media/icon-coinbase.svg',
-  'Frame': '/media/frame.png',
-  'MetaMask': '/media/icon-metamask.svg',
-  'Safe': '/media/safe.svg',
-  'WalletConnect': '/media/icon-walletconnect.svg',
-  'Window Provider': '/media/icon-metamask.svg', // Fallback for injected provider
+  'Brave Wallet': '/assets/media/brave.svg',
+  'Coinbase Wallet': '/assets/media/icon-coinbase.svg',
+  'Frame': '/assets/media/frame.png',
+  'MetaMask': '/assets/media/icon-metamask.svg',
+  'Safe': '/assets/media/safe.svg',
+  'WalletConnect': '/assets/media/icon-walletconnect.svg',
+  'Window Provider': '/assets/media/icon-metamask.svg', // Fallback for injected provider
 }
 
 const { connector, isReconnecting } = useAccount()

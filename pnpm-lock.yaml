@@ -384,6 +384,12 @@ importers:
       nuxt-security:
         specifier: catalog:arena
         version: 2.4.0(magicast@0.3.5)(rollup@2.79.2)
+      nuxtjs-phaser:
+        specifier: ^3.0.17
+        version: 3.0.17
+      phaser:
+        specifier: ^3.80.1
+        version: 3.90.0
       postcss-nested:
         specifier: catalog:arena
         version: 7.0.2(postcss@8.5.6)
@@ -8065,6 +8071,9 @@ packages:
       '@types/node':
         optional: true
 
+  nuxtjs-phaser@3.0.17:
+    resolution: {integrity: sha512-DUwfExEZywZN5T5x0d97os3wkX5iICnkpgbaa9SfUyrLn8qlfjJD7grGd20oTjnRgESgCWUXCukH/YMePSQgVQ==}
+
   nypm@0.6.2:
     resolution: {integrity: sha512-7eM+hpOtrKrBDCh7Ypu2lJ9Z7PNZBdi/8AT3AX8xoCj43BBVHD0hPSTEvMtkMpfs8FCqBGhxB+uToIQimA111g==}
     engines: {node: ^14.16.0 || >=16.10.0}
@@ -8418,6 +8427,9 @@ packages:
 
   perfect-debounce@2.0.0:
     resolution: {integrity: sha512-fkEH/OBiKrqqI/yIgjR92lMfs2K8105zt/VT6+7eTjNwisrsh47CeIED9z58zI7DfKdH3uHAn25ziRZn3kgAow==}
+
+  phaser@3.90.0:
+    resolution: {integrity: sha512-/cziz/5ZIn02uDkC9RzN8VF9x3Gs3XdFFf9nkiMEQT3p7hQlWuyjy4QWosU802qqno2YSLn2BfqwOKLv/sSVfQ==}
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -21437,6 +21449,12 @@ snapshots:
       - xml2js
       - yaml
 
+  nuxtjs-phaser@3.0.17:
+    dependencies:
+      phaser: 3.90.0
+      typescript: 5.9.3
+      vue: 3.5.22(typescript@5.9.3)
+
   nypm@0.6.2:
     dependencies:
       citty: 0.1.6
@@ -21922,6 +21940,10 @@ snapshots:
   perfect-debounce@1.0.0: {}
 
   perfect-debounce@2.0.0: {}
+
+  phaser@3.90.0:
+    dependencies:
+      eventemitter3: 5.0.1
 
   picocolors@1.1.1: {}
 

@@ -2,6 +2,9 @@
 useHydratedHead({
   title: 'Games',
 })
+
+const { getAllGames } = useGames()
+const games = getAllGames()
 </script>
 
 <template>
@@ -11,18 +14,25 @@ useHydratedHead({
     </h1>
 
     <div grid="~ cols-1 md:cols-2 lg:cols-3" gap-4>
-      <!-- Game cards will be populated dynamically -->
-      <div bg-base p-6 rounded-3 border="~ base" hover:bg-active transition-100>
-        <div flex="~ col" gap-3>
-          <div i-ri:gamepad-line text-4xl text-primary />
-          <h3 text-xl font-bold>
-            Coming Soon
-          </h3>
-          <p text-sm text-secondary>
-            New games are being added to the arena
-          </p>
-        </div>
-      </div>
+      <!-- Dynamic Game Cards -->
+      <GameCard
+        v-for="game in games"
+        :key="game.id"
+        :title="game.title"
+        :description="game.description"
+        :icon="game.icon"
+        :to="`/${game.id}/play`"
+        :tags="game.tags"
+        :available="game.available"
+      />
+
+      <!-- Coming Soon Card -->
+      <GameCard
+        title="Coming Soon"
+        description="More games are being added to the arena"
+        icon="i-ri:gamepad-line"
+        :available="false"
+      />
     </div>
   </div>
 </template>

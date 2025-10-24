@@ -135,6 +135,7 @@ export default defineNuxtConfig({
     build: {
       target: 'esnext',
     },
+
     optimizeDeps: {
       include: [
         'string-length',

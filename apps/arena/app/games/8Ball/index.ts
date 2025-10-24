@@ -1,0 +1,7 @@
+export { CueController } from './controllers/CueController'
+export { GameManager } from './managers/GameManager'
+export { Ball } from './objects/Ball'
+export { Table } from './objects/Table'
+export { default as PoolGame } from './PoolGame.vue'
+export { BootScene } from './scenes/BootScene'
+export { GameScene } from './scenes/GameSceneNew'
