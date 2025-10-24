@@ -21,13 +21,13 @@ const game = getGame(gameSlug)
         {{ game?.title || 'This game' }}
       </p>
       <NuxtLink
-        to="/{{ gameSlug }}/"
+        :to="`/${gameSlug}/`"
         btn-outline
         flex="~ gap-2"
         items-center
         text-lg px-8 py-4
       >
-        <div  i-ri:gamepad-fill />
+        <div i-ri:gamepad-fill />
         <span>Start Matchmaking</span>
       </NuxtLink>
     </div>

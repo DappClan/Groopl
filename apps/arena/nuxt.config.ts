@@ -86,7 +86,11 @@ export default defineNuxtConfig({
     entryImportMap: false,
   },
   compatibilityDate: '2024-08-14',
+  routeRules: {
+    // Static generation
+    '/[game]/': { prerender: true },
 
+  },
   nitro: {
     esbuild: {
       options: {
