@@ -10,7 +10,7 @@ SDK_INTERFACE_SETTINGS = {
     forceMockObject: !0,
     interstitial: { enabled: !0, initial: !1, preload: 250, retry: 2e3, timout: 250, cooldown: 0 },
     rewarded: { enabled: !1, preload: 250, retry: 2e3, timout: 250, reward: !0 },
-    // externalFiles: ["crazygames-sdk-v2.js"],
+    externalFiles: ["crazygames-sdk-v2.js"],
     features: {
         auto_quality: !1,
         copyright: !0,
